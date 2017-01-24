@@ -31,6 +31,7 @@ const (
 	WHITE           // 7 Safe website
 )
 
+// TODO: Blacklist and whitelist should be somewhere in inmemory storage instead of here so it could be easily updated without recompiling
 var bl = []*regexp.Regexp{
 	regexp.MustCompile("gooogle.com"),
 }

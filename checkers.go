@@ -97,7 +97,7 @@ func (c *Check) Result() bool {
 func (c *Check) Runner() {
 
 	lenChecks := len(c.C)
-	done := make(chan bool, lenChecks) // Might be a good idea to use GOMAXPROCS instead... but oh well, for now.
+	done := make(chan bool, lenChecks) // FIXME: Might be a good idea to use GOMAXPROCS instead... but oh well, for now.
 
 	res := map[bool]int{
 		true:  0,
