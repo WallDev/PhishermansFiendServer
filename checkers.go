@@ -10,6 +10,7 @@ package main
 import (
 	"bytes"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
 	"net/url"
 	"time"
@@ -41,8 +42,18 @@ type Check struct {
 	result string
 }
 
+// FakeChek is super dumb check to just test different situations randomly generating result and hangs random time...
+// because of this check and because of the amount of times it running the website might be marker red, grey or white in random order
 func FakeCheck(b []byte, c chan bool) {
-	time.Sleep(5 * time.Second)
+	duration := time.Duration(rand.Intn(3))
+	tof := rand.Intn(2)
+	logrus.Debugf("Check sleeps for %d seconds and returns %d", duration, tof)
+	time.Sleep(duration * time.Second)
+	if tof == 0 {
+		c <- false
+	} else {
+		c <- true
+	}
 }
 
 // LevenshteinCheck processes all the URLs found on page and if there is a url host which doesn't match href returns fail
@@ -70,7 +81,6 @@ func LevenshteinCheck(b []byte, c chan bool) {
 			c <- false
 		}
 	}
-	time.Sleep(5 * time.Second)
 	logrus.Debug("All good!")
 	c <- true
 }
@@ -108,7 +118,6 @@ func (c *Check) Runner() {
 		logrus.Debugf("Executing check %s", k)
 		// Starting goroutine for all the checks
 		go v(tree, done)
-		v(tree, done)
 	}
 	// wait for channels and assign to result
 	for i := 0; i < lenChecks; i++ {

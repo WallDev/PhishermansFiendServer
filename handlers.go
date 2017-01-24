@@ -40,8 +40,15 @@ func handleWbl(w http.ResponseWriter, r *http.Request) {
 	p.URL = r.FormValue("url")
 	p.PageHash = r.FormValue("hash")
 	c := Check{P: p, ID: randString(8)}
+	// TODO: Next lines add checks to run, this actually should be
+	// initialized in another place and possibly even taken from the
+	// extension's config
 	checks := make(map[string]func([]byte, chan bool))
 	checks["levenshtein"] = LevenshteinCheck
+	// next 3 checks are just to randomize the result of the websites in check
+	checks["dummy"] = FakeCheck
+	checks["dummy2"] = FakeCheck
+	checks["dummy3"] = FakeCheck
 	c.C = checks
 	running[c.ID] = true
 	go c.Runner()
@@ -58,7 +65,7 @@ func handleGetResult(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if v, ok := results[id]; ok {
-		enc.Encode(Resp{Success: v.Result(), Reason: v.R})
+		enc.Encode(Resp{Success: v.Result(), Reason: v.R, URL: v.P.URL})
 		delete(running, id)
 		return
 	}

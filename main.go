@@ -36,9 +36,9 @@ var bl = []*regexp.Regexp{
 }
 
 var wl = []*regexp.Regexp{
-	//regexp.MustCompile("google\\.com\\S{0,3}$"),
+	regexp.MustCompile("google\\.com\\S{0,3}$"),
 	regexp.MustCompile("facebook.com$"),
-	//regexp.MustCompile("localhost$"),
+	regexp.MustCompile("localhost$"),
 	regexp.MustCompile("chrome.com$"),
 }
 
