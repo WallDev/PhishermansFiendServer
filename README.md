@@ -35,3 +35,6 @@ chrome.com
 ```
 For blacklistion only `gooogle.com` is available. Every other website is checked with random results and might be marked as any siverity.
 * While "danger" page is featuring "report" of wrongly marked red website - it does not implement it as entire application is not connected to database at this moment.
+
+## Extension
+For extension documentation please look [here](http://github.com/WallDev/PhisermansFiendExtension)
