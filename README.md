@@ -25,7 +25,7 @@ It can run lots of checks in paralel at very low overhead cost as goroutines are
 ## Notes
 * There is no need in separate API to report hit. As while server running the check it has the url of the website hitted. According to the result server itself can add hits or misses to database. Currently implemented as simple log to stout
 * Current server setup is for testing and debugging. 
-For whitelisting it has only
+For whitelisting it has only:
 ```
 google.com
 facebook.com
@@ -33,8 +33,8 @@ localhost
 chrome.com
 
 ```
-For blacklistion only `gooogle.com` is available. Every other website is checked with random results and might be marked as any siverity.
+For blacklistion only `gooogle.com` is available. Every other website is checked with random results and might be marked as any severity.
 * While "danger" page is featuring "report" of wrongly marked red website - it does not implement it as entire application is not connected to database at this moment.
 
 ## Extension
-For extension documentation please look [here](http://github.com/WallDev/PhisermansFiendExtension)
+For extension documentation please look [here](https://github.com/WallDev/PhishermansFiendExtension)
