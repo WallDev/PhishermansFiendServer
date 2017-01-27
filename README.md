@@ -1,7 +1,7 @@
 # Intro
 This is server for PhishermansFiend chrome extension.
 
-Research about the phishing can be found here https://walldev.github.io/PhishermansFiendExtension/
+Research about the phishing can be found here https://github.com/WallDev/PhishermansFiendExtension
 
 The server is part of http://github.com/WallDev/PhisermansFiendExtension project.
 Written on golang and prepared for go 1.8 with it's plugin support the server is very fast and reliable.
