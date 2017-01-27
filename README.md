@@ -17,7 +17,11 @@ It can run lots of checks in paralel at very low overhead cost as goroutines are
 1. Before browser makes a request to the domain that user asked for, extension sends request to the server and it checks the domain with whitelist and if not found in blacklist.
 2. If the domain is not whitelisted or blacklisted - starts checks on the website that the user requested and responding to extension to load the website.
 3. Extension unblock the original request and allows browser to load the website while disabling all input method on the page to not to allow user to input data into non-checked website
-4. Extension polling the server for when checks finish. As soon as server returns response with final result the extension takes corresponding actions:
+4. While the server is running the checks the extensions runs it own set of checks on client side. This checks are lightweight and should not produce lag unlike the possibly long running checks on server. Currently implemented checks are:
+  * Checks the server have real domain name. If this is an IP address responde with high severity. Ignored addresses are those that begin with `192.168` and `127.0.0.1`.
+  * Checks the urls on site for dangerous matches.
+  * Checks the amount of url that leading outbound, if there are too many of them mark the website with medium severity.
+5. Extension polling the server for when checks finish. As soon as server returns response with final result the extension takes corresponding actions:
   1. If the website is marked as WHITE then all the inputs are re-enabled and user allowed to proceed
   2. If the website is marked as GREY then the extension allows user to use the site but inverting all the colors of the page and showing topbar explaining that this website might be dangerous and advices to proceed with care. This notification is clickable and click on it will revert everything to normal state.
   3. If the website is marked as RED then extension redirects user to special page explaining the website is dangerous and blocked to use.
