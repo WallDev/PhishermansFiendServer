@@ -11,6 +11,8 @@ import (
 	"time"
 )
 
+const password = "1234"
+
 // Resp Server response
 type Resp struct {
 	Success bool   `json:"success"`
