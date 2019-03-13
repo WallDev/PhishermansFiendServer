@@ -84,4 +84,5 @@ func handleErrorPage(w http.ResponseWriter, r *http.Request) {
 		Host: r.FormValue("host"),
 	}
 	t.Execute(w, c)
+	fmt.Println("herllo")
 }
